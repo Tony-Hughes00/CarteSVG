@@ -7,11 +7,10 @@ namespace Carte;
 <?php
 
 class Carte {
-    private $communePoly = [];
-    private $communes = [];
-   
-    function __construct($communePoly) {
-        $this->communePoly = $communePoly;
+    private $data = [];
+  
+    function __construct($data) {
+        $this->data = $data;
     }
    
     function show() {
@@ -20,6 +19,8 @@ class Carte {
         $this->showPolys();
 
         $this->closeSVG();
+
+        $this->onLoad();
     }
     private function openSVG() {
         echo '<svg id="svgDiv" version="1.1" xmlns:bx="https://boxy-svg.com" xmlns="http://www.w3.org/2000/svg"
@@ -29,12 +30,19 @@ class Carte {
         echo '</svg>';
     }
     private function showPolys() {
-        foreach ($this->communePoly as $key => $commune) {
+        foreach ($this->data['communePoly'] as $key => $commune) {
             echo '<polygon id="' . $key . '" name="' . $commune->nom . '" class="' . $commune->class . '" fill="' . $commune->fill . '"';
             echo ' stroke="' . $commune->stroke . '" stroke_width="' . $commune->stroke_width . '"';
             echo ' points="' . $commune->points . '"/>';
           }
     }
+    private function onLoad() {
+        echo "<script>";
+        echo "onLoad(" . json_encode($this->data) . ")";
+        echo "</script>";
+
+    }
 }
 
 ?>
+  <script src="./carte/carte.js" type="text/javascript"></script>

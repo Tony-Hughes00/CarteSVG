@@ -23,16 +23,17 @@
   <title>RWF Carte Interactiv</title>
   <link rel="stylesheet" href="./assets/CSS/carte.css">
 </head>
-<body >
+<body>
   <h1 style="text-align:center;">Rural Web Factory - Carte Intractive</h1>
 
 Hello
 <?php require ROOT . '/Carte/carte/carte.php'; 
-
-    $carte = new Carte\Carte($communesCarte);
+    $data = [];
+    $data['communePoly'] = $communesCarte;
+    $data['data'] = [];
+    $carte = new Carte\Carte($data);
     $carte->show();
 ?>
 
-  <script src="./assets/JS/carte.js" type="text/javascript"></script>
   </body>
 </html>
